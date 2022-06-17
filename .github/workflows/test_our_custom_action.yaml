@@ -29,8 +29,8 @@ jobs:
       - name: commsn
         id: build
         run: |
-            ls
-            echo ::set-output name=exit_code::$?
+           ls
+            echo ::set-output name=exit_code::1
             echo "Exited with $?"
       - name: Deployment Successful
         if:  steps.validate.outputs.result == 'success' && steps.build.outputs.exit_code == 0
