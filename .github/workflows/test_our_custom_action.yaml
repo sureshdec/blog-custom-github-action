@@ -13,8 +13,6 @@ jobs:
           pokemon_id: ''
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
-      - id: step1
-        run: echo "::set-output name=test::${{ steps.pokemon.outputs.pokemon_name }}"
       - name: Validate Template via bash commands
         id: validate
         shell: bash
@@ -29,8 +27,10 @@ jobs:
             echo "::set-output name=result::success"
           fi
       - name: Deployment Successful
-        if:  steps.validate.outputs.result == 'success'
+        if:  steps.validate.outputs.result == 'success' && success()
         run: echo "devl deploy"
+      - run: echo "Deployment Successful"
       - name: Deployment Failure
-        if:  steps.validate.outputs.result == 'failure'
+        if:  steps.validate.outputs.result == 'failure' && failure()
         run: echo "prod deploy"
+      - run: echo "Deployment Failed"
