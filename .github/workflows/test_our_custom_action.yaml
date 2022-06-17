@@ -17,7 +17,7 @@ jobs:
         id: validate
         shell: bash
         run: |
-          if [[ -z ${{ steps.pokemon.outputs.pokemon_name }} || ${{ steps.pokemon.outputs.pokemon_name }} -eq "null" ]]; 
+          if [ -z ${{ steps.pokemon.outputs.pokemon_name }} ] || [ ${{ steps.pokemon.outputs.pokemon_name }} == "null" ]; 
           then
             echo "change request id is false"
             echo "::set-output name=result::failure"
