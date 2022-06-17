@@ -13,3 +13,9 @@ jobs:
           pokemon_id: 150
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
+      - name: Deployment Successful
+        if: steps.pokemon.outputs.value == 'true'
+        run: echo "devl deploy"
+      - name: Deployment Successful
+        if: steps.pokemon.outputs.value == 'false'
+        run: echo "prod deploy"
