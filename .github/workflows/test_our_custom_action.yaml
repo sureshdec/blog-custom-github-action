@@ -5,8 +5,6 @@ jobs:
   custom_test:
     runs-on: ubuntu-latest
     name: We test it locally with act
-    outputs:
-      config: ${{ steps.pokemon.outputs.pokemon_name }}
     steps:
       - name: Get Pokemon name
         uses: philschmid/blog-custom-github-action@master
@@ -19,7 +17,8 @@ jobs:
         id: validate
         shell: bash
         run: |
-          if ${{ steps.pokemon.outputs.pokemon_name }} ; then
+          if [ -z ${{ steps.pokemon.outputs.pokemon_name }} ]
+          then
             echo "::set-output name=result::success"
           else
             echo "::set-output name=result::failure"
