@@ -12,22 +12,25 @@ jobs:
         uses: philschmid/blog-custom-github-action@master
         id: pokemon
         with:
-          pokemon_id: ''
+          pokemon_id: 250
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
       - name: Validate Template via bash commands
         id: validate
         shell: bash
         run: |
+         
           if [ ! -z ${{ needs.custom_test.outputs.change-request-id }} ]
           then
+            echo ${{ needs.custom_test.outputs.change-request-id }}
             echo "::set-output name=result::success"
           else
+            echo ${{ needs.custom_test.outputs.change-request-id }}
             echo "::set-output name=result::failure"
           fi
       - name: Deployment Successful
         if:  steps.validate.outputs.result == 'success'
         run: echo "devl deploy"
-      - name: Deployment Successful
+      - name: Deployment Failure
         if:  steps.validate.outputs.result == 'failure'
         run: echo "prod deploy"
