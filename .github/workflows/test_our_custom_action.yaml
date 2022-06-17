@@ -23,17 +23,19 @@ jobs:
             echo "::set-output name=result::failure"
           else
              echo "change request id is true"
-            echo "::set-output name=result::success"
+             echo "::set-output name=result::success"
+      
           fi
       - name: commsn
+        id: build
         run: |
             ls
             echo ::set-output name=exit_code::$?
             echo "Exited with $?"
       - name: Deployment Successful
-        if:  steps.validate.outputs.result == 'success' &&  success()
+        if:  steps.validate.outputs.result == 'success' && steps.build.outputs.exit_code == 0
         run: echo "devl deploy"
       - name: Deployment Failure
-        if:  steps.validate.outputs.result == 'failure' &&  failure()
+        if:  steps.validate.outputs.result == 'failure' &&  steps.build.outputs.exit_code != 0
         run: echo "prod deploy"
 
