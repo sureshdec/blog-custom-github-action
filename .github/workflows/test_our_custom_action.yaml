@@ -4,6 +4,8 @@ on:
 jobs:
   custom_test:
     runs-on: ubuntu-latest
+    outputs:
+     change-request-id: "${{ steps.pokemon.outputs.pokemon_name }}"
     name: We test it locally with act
     steps:
       - name: Get Pokemon name
@@ -17,7 +19,7 @@ jobs:
         id: validate
         shell: bash
         run: |
-          if [ -z ${{ steps.pokemon.outputs.pokemon_name }} ]
+          if [ -z ${{ job1.outputs.change-request-id }} ]
           then
             echo "::set-output name=result::success"
           else
