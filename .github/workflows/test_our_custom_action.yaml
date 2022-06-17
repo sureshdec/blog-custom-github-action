@@ -4,8 +4,6 @@ on:
 jobs:
   custom_test:
     runs-on: ubuntu-latest
-    outputs:
-     change-request-id: "${{ steps.pokemon.outputs.pokemon_name }}"
     name: We test it locally with act
     steps:
       - name: Get Pokemon name
@@ -15,17 +13,19 @@ jobs:
           pokemon_id: 250
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
+      - id: step1
+        run: echo "::set-output name=test::${{ steps.pokemon.outputs.pokemon_name }}"
       - name: Validate Template via bash commands
         id: validate
         shell: bash
         run: |
-          echo ${{ needs.custom_test.outputs.change-request-id }}
-          if [ z ${{ needs.custom_test.outputs.change-request-id }} ]
+          echo  ${{ steps.pokemon.outputs.pokemon_name }} 
+          if [ z ${{ steps.pokemon.outputs.pokemon_name }} ]
           then
-            echo ${{ needs.custom_test.outputs.change-request-id }}
+            echo ${{ steps.pokemon.outputs.pokemon_name }} 
             echo "::set-output name=result::failure"
           else
-            echo ${{ needs.custom_test.outputs.change-request-id }}
+            echo ${{ steps.pokemon.outputs.pokemon_name }} 
             echo "::set-output name=result::success"
           fi
       - name: Deployment Successful
