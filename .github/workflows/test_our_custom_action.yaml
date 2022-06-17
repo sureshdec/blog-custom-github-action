@@ -34,9 +34,9 @@ jobs:
             echo "Exited with $?"
             echo ${{ steps.validate.outputs.result }}
       - name: Deployment Successful
-        if:  steps.validate.outputs.result == 'success' && steps.build.outputs.exit_code == 0
+        if: ${{ steps.validate.outputs.result == 'success' && steps.build.outputs.exit_code == 0 }}
         run: echo "devl deploy"
       - name: Deployment Failure
-        if:  steps.validate.outputs.result == 'failure' &&  steps.build.outputs.exit_code != 0
+        if: ${{ steps.validate.outputs.result == 'failure' &&  steps.build.outputs.exit_code != 0 }}
         run: echo "prod deploy"
 
