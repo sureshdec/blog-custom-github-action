@@ -12,7 +12,7 @@ jobs:
         uses: philschmid/blog-custom-github-action@master
         id: pokemon
         with:
-          pokemon_id: 150
+          pokemon_id: ''
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
       - name: Validate Template via bash commands
