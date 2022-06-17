@@ -27,7 +27,7 @@ jobs:
           fi
       - name: commsn
         run: |
-           l 
+           exit 1 
            echo ::set-output name=exit_code::$?
            echo "Exited with $?"
       - name: Deployment Successful
