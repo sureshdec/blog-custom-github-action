@@ -27,9 +27,9 @@ jobs:
           fi
       - name: commsn
         run: |
-           echo "suresh"ll
-           echo ::set-output name=exit_code::$?
-           echo "Exited with $?"
+            ls
+            echo ::set-output name=exit_code::$?
+            echo "Exited with $?"
       - name: Deployment Successful
         if:  steps.validate.outputs.result == 'success' &&  success()
         run: echo "devl deploy"
