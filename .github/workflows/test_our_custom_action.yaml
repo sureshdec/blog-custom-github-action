@@ -10,7 +10,7 @@ jobs:
         uses: philschmid/blog-custom-github-action@master
         id: pokemon
         with:
-          pokemon_id: ''
+          pokemon_id: 150
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
       - id: step1
@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           echo  ${{ steps.pokemon.outputs.pokemon_name }} 
-          if [ z "${{ steps.pokemon.outputs.pokemon_name }}" ]
+          if [ -z "${{ steps.pokemon.outputs.pokemon_name }}" ]
           then
             echo ${{ steps.pokemon.outputs.pokemon_name }} 
             echo "::set-output name=result::failure"
