@@ -27,10 +27,10 @@ jobs:
             echo "::set-output name=result::success"
           fi
       - name: Deployment Successful
-        if:  steps.validate.outputs.result == 'success' && success()
+        if:  ${{ steps.validate.outputs.result == 'success' && success() }}
         run: echo "devl deploy"
       - run: echo "Deployment Successful"
       - name: Deployment Failure
-        if:  steps.validate.outputs.result == 'failure' && failure()
+        if:  ${{ steps.validate.outputs.result == 'failure' && failure() }}
         run: echo "prod deploy"
       - run: echo "Deployment Failed"
