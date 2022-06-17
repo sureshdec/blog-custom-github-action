@@ -10,7 +10,7 @@ jobs:
         uses: philschmid/blog-custom-github-action@master
         id: pokemon
         with:
-          pokemon_id: ''
+          pokemon_id: 150
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
       - name: Validate Template via bash commands
@@ -27,13 +27,13 @@ jobs:
           fi
       - name: commsn
         run: |
-           exit 1 
+           echo "suresh"ll
            echo ::set-output name=exit_code::$?
            echo "Exited with $?"
       - name: Deployment Successful
-        if:  steps.validate.outputs.result == 'success' && steps.build.outputs.exit_code == 0
+        if:  steps.validate.outputs.result == 'success' &&  success()
         run: echo "devl deploy"
       - name: Deployment Failure
-        if:  steps.validate.outputs.result == 'failure' && steps.build.outputs.exit_code != 0
+        if:  steps.validate.outputs.result == 'failure' &&  failure()
         run: echo "prod deploy"
 
