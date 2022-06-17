@@ -14,10 +14,19 @@ jobs:
         with:
           pokemon_id: 150
       - name: Get the pokemon
-        run: echo "${{ steps.pokemon.outputs.value }} attack"
+        run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
+      - name: Validate Template via bash commands
+        id: validate
+        shell: bash
+        run: |
+          if ${{ steps.pokemon.outputs.pokemon_name }} ; then
+            echo "::set-output name=result::success"
+          else
+            echo "::set-output name=result::failure"
+          fi
       - name: Deployment Successful
-        if:  steps.pokemon.outputs.config == 'true'
+        if:  steps.validate.outputs.result == 'success'
         run: echo "devl deploy"
       - name: Deployment Successful
-        if: steps.pokemon.outputs.value == 'false'
+        if:  steps.validate.outputs.result == 'failure'
         run: echo "prod deploy"
