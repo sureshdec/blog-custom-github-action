@@ -5,6 +5,8 @@ jobs:
   custom_test:
     runs-on: ubuntu-latest
     name: We test it locally with act
+    outputs:
+      config: ${{ steps.pokemon.outputs.pokemon_name }}
     steps:
       - name: Get Pokemon name
         uses: philschmid/blog-custom-github-action@master
@@ -14,7 +16,7 @@ jobs:
       - name: Get the pokemon
         run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
       - name: Deployment Successful
-        if:  steps.pokemon.outputs.pokemon_id == 'true'
+        if:  steps.pokemon.outputs.config == 'true'
         run: echo "devl deploy"
       - name: Deployment Successful
         if: steps.pokemon.outputs.value == 'false'
