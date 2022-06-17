@@ -32,8 +32,6 @@ jobs:
             ls
             echo ::set-output name=exit_code::$?
             echo "Exited with $?"
-            echo ${{ steps.validate.outputs.result }}
-            echo ${{ steps.build.outputs.exit_code }}
       - name: Deployment Successful
         if: ${{ steps.validate.outputs.result == 'success' && steps.build.outputs.exit_code == 0 }}
         run: echo "devl deploy"
