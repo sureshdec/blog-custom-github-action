@@ -19,7 +19,7 @@ jobs:
         id: validate
         shell: bash
         run: |
-        
+          echo ${{ needs.custom_test.outputs.change-request-id }}
           if [ z ${{ needs.custom_test.outputs.change-request-id }} ]
           then
             echo ${{ needs.custom_test.outputs.change-request-id }}
