@@ -17,13 +17,12 @@ jobs:
         id: validate
         shell: bash
         run: |
-          echo  ${{ steps.pokemon.outputs.pokemon_name }} 
           if [[ -z "${{ steps.pokemon.outputs.pokemon_name }}" || "${{ steps.pokemon.outputs.pokemon_name }}" -eq "null" ]]; 
           then
-            echo ${{ steps.pokemon.outputs.pokemon_name }} 
+            echo "change request id is false"
             echo "::set-output name=result::failure"
           else
-            echo ${{ steps.pokemon.outputs.pokemon_name }} 
+             echo "change request id is true"
             echo "::set-output name=result::success"
           fi
       - name: commsn
