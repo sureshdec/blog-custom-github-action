@@ -19,14 +19,14 @@ jobs:
         id: validate
         shell: bash
         run: |
-         
-          if [ ! -z ${{ needs.custom_test.outputs.change-request-id }} ]
+        
+          if [ z ${{ needs.custom_test.outputs.change-request-id }} ]
           then
             echo ${{ needs.custom_test.outputs.change-request-id }}
-            echo "::set-output name=result::success"
+            echo "::set-output name=result::failure"
           else
             echo ${{ needs.custom_test.outputs.change-request-id }}
-            echo "::set-output name=result::failure"
+            echo "::set-output name=result::success"
           fi
       - name: Deployment Successful
         if:  steps.validate.outputs.result == 'success'
