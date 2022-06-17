@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           echo  ${{ steps.pokemon.outputs.pokemon_name }} 
-          if [ -z "${{ steps.pokemon.outputs.pokemon_name }}" ]  && [ "${{ steps.pokemon.outputs.pokemon_name }}" -eq NULL ]
+          if [ -z "${{ steps.pokemon.outputs.pokemon_name }}" ]  && [ "${{ steps.pokemon.outputs.pokemon_name }}" -eq null ]
           then
             echo ${{ steps.pokemon.outputs.pokemon_name }} 
             echo "::set-output name=result::failure"
